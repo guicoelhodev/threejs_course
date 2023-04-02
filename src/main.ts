@@ -130,8 +130,8 @@ const animate = () => {
 
   frame += 0.01;
 
-  const { array, originalPosition, randomValues } = planeMesh.geometry
-    .attributes.position as any;
+  const { array, originalPosition } = planeMesh.geometry.attributes
+    .position as any;
 
   for (let i = 0; i < array.length; i += 3) {
     array[i] = originalPosition[i] + Math.cos(frame) * 0.004;
