@@ -59,6 +59,7 @@ renderer.setPixelRatio(devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 
 new OrbitControls(camera, renderer.domElement);
+
 camera.position.z = 3;
 
 // plane geometry
@@ -205,4 +206,33 @@ gsap.to("#showMore", {
   delay: 0.6,
   y: 0,
   ease: "expo",
+});
+
+// camera moviments
+
+document.querySelector("#showMore")?.addEventListener("click", (evt) => {
+  evt.preventDefault();
+
+  gsap.to("#container", {
+    opacity: 0,
+  });
+
+  gsap.to(camera.position, {
+    z: 7,
+    ease: "power3.inOut",
+    duration: 1.5,
+  });
+
+  gsap.to(camera.rotation, {
+    x: Math.PI / 2,
+    ease: "power3.inOut",
+    duration: 1.5,
+  });
+
+  gsap.to(camera.position, {
+    y: 1000,
+    ease: "power3.in",
+    duration: 1,
+    delay: 1.2,
+  });
 });
