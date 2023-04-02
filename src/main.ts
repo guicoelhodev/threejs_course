@@ -2,21 +2,21 @@ import * as THREE from "three";
 import * as dat from "dat.gui";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 const world = {
   plane: {
-    width: 10,
-    height: 10,
-    widthSegments: 15,
-    heightSegments: 15,
+    width: 100,
+    height: 50,
+    widthSegments: 40,
+    heightSegments: 40,
   },
 };
 
-gui.add(world.plane, "width", 1, 20).onChange(generatePlane);
-gui.add(world.plane, "height", 1, 20).onChange(generatePlane);
-gui.add(world.plane, "widthSegments", 1, 20).onChange(generatePlane);
-gui.add(world.plane, "heightSegments", 1, 20).onChange(generatePlane);
+// gui.add(world.plane, "width", 1, 100).onChange(generatePlane);
+// gui.add(world.plane, "height", 1, 100).onChange(generatePlane);
+// gui.add(world.plane, "widthSegments", 1, 80).onChange(generatePlane);
+// gui.add(world.plane, "heightSegments", 1, 80).onChange(generatePlane);
 
 function generatePlane() {
   planeMesh.geometry.dispose();
@@ -61,7 +61,7 @@ camera.position.z = 3;
 
 // plane geometry
 
-const planeGeometry = new THREE.PlaneGeometry(10, 10, 15, 15);
+const planeGeometry = new THREE.PlaneGeometry(50, 50, 40, 40);
 
 const planeMaterial = new THREE.MeshPhongMaterial({
   color: 0xff0000,
@@ -87,9 +87,9 @@ for (let i = 0; i < array.length; i += 3) {
     const y = array[i + 1];
     const z = array[i + 2];
 
-    array[i] = x + Math.random() - 0.5;
+    array[i] = x + Math.random() - 0.1;
     array[i + 1] = y + Math.random() - 0.5;
-    array[i + 2] = z - Math.random();
+    array[i + 2] = z - Math.random() - 0.5;
   }
 
   randomValues.push(Math.random());
@@ -114,6 +114,37 @@ const backlight = new THREE.DirectionalLight(0xffffff, 1);
 backlight.position.set(0, 0, -1);
 
 scene.add(backlight);
+
+// startship galaxy
+
+const starGeometry = new THREE.BufferGeometry();
+
+const startMaterial = new THREE.PointsMaterial({
+  color: 0xffffff,
+});
+
+const startVertices = [];
+
+for (let i = 0; i < 1000; i++) {
+  const x = (Math.random() - 0.5) * 2000;
+  const y = (Math.random() - 0.5) * 2000;
+  const z = (Math.random() - 0.5) * 2000;
+
+  startVertices.push(x, y, z);
+}
+
+// console.log(startVertices);
+
+starGeometry.setAttribute(
+  "position",
+  new THREE.Float32BufferAttribute(startVertices, 3)
+);
+
+const stars = new THREE.Points(starGeometry, startMaterial);
+
+scene.add(stars);
+
+console.log(starGeometry);
 
 // animation
 
