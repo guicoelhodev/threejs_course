@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import * as dat from "dat.gui";
+import gsap from "gsap";
+
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 // const gui = new dat.GUI();
@@ -125,7 +127,7 @@ const startMaterial = new THREE.PointsMaterial({
 
 const startVertices = [];
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 6000; i++) {
   const x = (Math.random() - 0.5) * 2000;
   const y = (Math.random() - 0.5) * 2000;
   const z = (Math.random() - 0.5) * 2000;
@@ -169,6 +171,8 @@ const animate = () => {
 
     planeMesh.geometry.attributes.position.needsUpdate = true;
   }
+
+  stars.rotation.x += 0.001;
 };
 
 animate();
@@ -176,4 +180,29 @@ animate();
 addEventListener("mousemove", (evt) => {
   mouse.x = (evt.clientX / innerWidth) * 2 - 1; // separate x and y coordenations
   mouse.y = (evt.clientY / innerHeight) * 2 - 1;
+});
+
+// animation CSS
+
+gsap.to("#name-title", {
+  opacity: 1,
+  duration: 1.5,
+  y: 0,
+  ease: "expo",
+});
+
+gsap.to("#subtitle", {
+  opacity: 1,
+  duration: 1.5,
+  delay: 0.3,
+  y: 0,
+  ease: "expo",
+});
+
+gsap.to("#showMore", {
+  opacity: 1,
+  duration: 1.5,
+  delay: 0.6,
+  y: 0,
+  ease: "expo",
 });
