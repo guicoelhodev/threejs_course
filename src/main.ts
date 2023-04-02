@@ -218,7 +218,7 @@ document.querySelector("#showMore")?.addEventListener("click", (evt) => {
   });
 
   gsap.to(camera.position, {
-    z: 7,
+    z: 5,
     ease: "power3.inOut",
     duration: 1.5,
   });
@@ -234,5 +234,18 @@ document.querySelector("#showMore")?.addEventListener("click", (evt) => {
     ease: "power3.in",
     duration: 1,
     delay: 1.2,
+    onComplete: () => {
+      window.location = "https://google.com" as any;
+    },
   });
+});
+
+// add responsivity resize
+
+addEventListener("resize", () => {
+  camera.aspect = innerWidth / innerHeight;
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(innerWidth, innerHeight);
 });
