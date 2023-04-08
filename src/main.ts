@@ -4,7 +4,7 @@ import gsap from "gsap";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-// const gui = new dat.GUI();
+const gui = new dat.GUI();
 
 const world = {
   plane: {
@@ -15,10 +15,10 @@ const world = {
   },
 };
 
-// gui.add(world.plane, "width", 1, 100).onChange(generatePlane);
-// gui.add(world.plane, "height", 1, 100).onChange(generatePlane);
-// gui.add(world.plane, "widthSegments", 1, 80).onChange(generatePlane);
-// gui.add(world.plane, "heightSegments", 1, 80).onChange(generatePlane);
+gui.add(world.plane, "width", 1, 100).onChange(generatePlane);
+gui.add(world.plane, "height", 1, 100).onChange(generatePlane);
+gui.add(world.plane, "widthSegments", 1, 80).onChange(generatePlane);
+gui.add(world.plane, "heightSegments", 1, 80).onChange(generatePlane);
 
 function generatePlane() {
   planeMesh.geometry.dispose();
@@ -34,8 +34,8 @@ function generatePlane() {
   for (let i = 0; i < array.length; i += 3) {
     // 3 its 3 dimensions (x,y,z)
 
-    const x = array[i];
-    const y = array[i + 1];
+    // const x = array[i];
+    // const y = array[i + 1];
     const z = array[i + 2];
 
     array[i + 2] = z - Math.random();
